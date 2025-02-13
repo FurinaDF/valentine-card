@@ -26,7 +26,7 @@
             max-width: 600px;
             text-align: center;
             position: relative;
-            animation: fadeInUp 1s ease-out;
+            animation: flowerBloom 1s ease-out;
         }
 
        .card h1 {
@@ -34,9 +34,16 @@
             font-size: 3em;
             margin-bottom: 20px;
             animation: bounceIn 1s ease-out 0.5s backwards;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-       .card p {
+       .card h1:hover {
+            transform: scale(1.1);
+            color: #FF69B4;
+            text-shadow: 0 0 10px #FF69B4;
+        }
+
+        .card p {
             color: #333;
             font-size: 1.2em;
             line-height: 1.6;
@@ -53,15 +60,42 @@
             animation: heartFall 3s linear infinite;
         }
 
-        @keyframes fadeInUp {
+       .star {
+            color: gold;
+            position: absolute;
+            font-size: 1.5em;
+            animation: starTwinkle 1.5s infinite;
+        }
+
+       .clickable-heart {
+            color: #FF1493;
+            font-size: 3em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+       .clickable-heart:hover {
+            transform: scale(1.2);
+        }
+
+       .petal {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: pink;
+            border-radius: 50%;
+            animation: petalFall 3s linear;
+        }
+
+        @keyframes flowerBloom {
             from {
+                transform: scale(0);
                 opacity: 0;
-                transform: translateY(50px);
             }
 
             to {
+                transform: scale(1);
                 opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -101,20 +135,54 @@
             }
         }
 
-       .clickable-heart {
-            color: #FF1493;
-            font-size: 3em;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        @keyframes starTwinkle {
+            0% {
+                opacity: 0.2;
+                color: gold; /* 确保动画中的颜色也是金色 */
+            }
+            50% {
+                opacity: 1;
+                color: gold; /* 确保动画中的颜色也是金色 */
+            }
+            100% {
+                opacity: 0.2;
+                color: gold; /* 确保动画中的颜色也是金色 */
+            }
         }
 
-       .clickable-heart:hover {
-            transform: scale(1.2);
+        @keyframes petalFall {
+            from {
+                top: -50px;
+                transform: rotate(0deg);
+            }
+
+            to {
+                top: 100vh;
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes colorChange {
+            from {
+                color: #FF1493;
+            }
+
+            to {
+                color: #FF69B4;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="card">
+        <h1>情人节快乐 <span class="heart">❤</span></h1>
+        <p>亲爱的，在这个浪漫的情人节，你就像夜空中最亮的星，点亮了我整个世界。每一次和你在一起，时光都变得无比甜蜜，那些温馨的瞬间，如同璀璨的宝石，镶嵌在我记忆的深处。</p>
+        <p>你的笑容，如同春日里绽放的花朵，芬芳了我的心田；你的拥抱，好似冬日里温暖的炉火，驱散了我所有的寒冷。和你相伴的日子，是我生命中最美好的旅程。</p>
+        <p>未来的日子里，我愿与你一起走过每一个春夏秋冬，看遍世间的花开花落。无论风雨如何，我都会紧紧握住你的手，与你携手一生，不离不弃。</p>
+        <p>我爱你，这份爱，如同滔滔江水，连绵不绝；如同巍峨高山，坚定不移。愿我们的爱情，像一首永恒的旋律，永远奏响幸福的乐章。</p>
+        <span class="clickable-heart" onclick="clickHeart()">❤</span>
+    </div>
     <!-- 随机生成的心形元素 -->
     <div class="heart" style="left: 10%; animation-delay: 0s;"></div>
     <div class="heart" style="left: 25%; animation-delay: 0.5s;"></div>
@@ -123,18 +191,26 @@
     <div class="heart" style="left: 70%; animation-delay: 2s;"></div>
     <div class="heart" style="left: 85%; animation-delay: 2.5s;"></div>
 
-    <div class="card">
-        <h1>情人节快乐 <span class="heart">❤</span></h1>
-        <p>亲爱的，在这个浪漫的情人节，你就像夜空中最亮的星，点亮了我整个世界。每一次和你在一起，时光都变得无比甜蜜，那些温馨的瞬间，如同璀璨的宝石，镶嵌在我记忆的深处。</p>
-        <p>你的笑容，如同春日里绽放的花朵，芬芳了我的心田；你的拥抱，好似冬日里温暖的炉火，驱散了我所有的寒冷。和你相伴的日子，是我生命中最美好的旅程。</p>
-        <p>未来的日子里，我愿与你一起走过每一个春夏秋冬，看遍世间的花开花落。无论风雨如何，我都会紧紧握住你的手，与你携手一生，不离不弃。</p>
-        <p>我爱你，这份爱，如同滔滔江水，连绵不绝；如同巍峨高山，坚定不移。愿我们的爱情，像一首永恒的旋律，永远奏响幸福的乐章。</p>
-        <span class="clickable-heart" onclick="showMessage()">❤</span>
-    </div>
+    <!-- 随机生成的星星元素 -->
+    <div class="star" style="left: 15%; animation-delay: 0.2s;"></div>
+    <div class="star" style="left: 30%; animation-delay: 0.7s;"></div>
+    <div class="star" style="left: 45%; animation-delay: 1.2s;"></div>
+    <div class="star" style="left: 60%; animation-delay: 1.7s;"></div>
+    <div class="star" style="left: 75%; animation-delay: 2.2s;"></div>
+    <div class="star" style="left: 90%; animation-delay: 2.7s;"></div>
+    
 
     <script>
-        function showMessage() {
-            alert('愿我们的爱情永远甜蜜如初！');
+        function clickHeart() {
+            for (let i = 0; i < 20; i++) {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = Math.random() * 100 + '%';
+                document.body.appendChild(petal);
+                setTimeout(() => {
+                    petal.remove();
+                }, 3000);
+            }
         }
     </script>
 </body>
